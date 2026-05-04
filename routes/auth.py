@@ -13,7 +13,7 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 @router.post("/register", response_model = MessageResponse)
 async def register(user: Annotated[UserRegister,Body()], conn: Annotated[object, Depends(get_conn)]):
     async with conn.cursor() as cursor:
-        hashed = await hash_password(user["password"])
+        hashed = await hash_password(user.password)
 
         try:
             await cursor.execute(
@@ -28,7 +28,7 @@ async def register(user: Annotated[UserRegister,Body()], conn: Annotated[object,
 
 
 
-@router.post("/login", response_model=TokenResponse)
+@router.get("/login", response_model=TokenResponse)
 async def login(user:Annotated[UserLogin, Body()], conn:Annotated[object, Depends(get_conn)]):
     async with conn.cursor(aiomysql.DictCursor) as cursor:
         await cursor.execute(

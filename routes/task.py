@@ -39,12 +39,12 @@ async def create_task(
 
 
 
-@router.get("/all/", response_model=list[TaskOut])
+@router.get("/all", response_model=list[TaskOut])
 async def get_all_tasks(
     user: Annotated[CurrentUser, Depends(get_current_user)],
     conn: Annotated[object, Depends(get_conn)]
 ):
-    async with conn.cusor(aiomysql.DictCursor) as cursor:
+    async with conn.cursor(aiomysql.DictCursor) as cursor:
         await cursor.execute(
             "SELECT id, title, description, status FROM tasks WHERE user_id = %s",
             (user.user_id,)
