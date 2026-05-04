@@ -1,0 +1,15 @@
+[project]
+name = "task-manager-04"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiomysql>=0.3.2",
+    "bcrypt>=5.0.0",
+    "fastapi>=0.136.1",
+    "pydantic[email]>=2.13.3",
+    "python-dotenv>=1.2.2",
+    "python-jose[cryptography]>=3.5.0",
+    "uvicorn>=0.46.0",
+]
